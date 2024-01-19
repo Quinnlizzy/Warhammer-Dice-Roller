@@ -1,9 +1,7 @@
-// src/App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceOne, faDiceTwo, faDiceThree, faDiceFour, faDiceFive, faDiceSix } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
-
 
 const diceIcons = [faDiceOne, faDiceTwo, faDiceThree, faDiceFour, faDiceFive, faDiceSix];
 
@@ -15,15 +13,41 @@ function App() {
   const rollDice = () => {
     setRolling(true);
     setTimeout(() => {
-    const results = [];
-    for (let i = 0; i < numberOfDice; i++) {
-      const result = Math.floor(Math.random() * 6) + 1;
-      results.push(result);
-    }
-    setDiceResults(results);
-    setRolling(false);
-    }, 1000); 
+      const results = [];
+      for (let i = 0; i < numberOfDice; i++) {
+        const result = Math.floor(Math.random() * 6) + 1;
+        results.push(result);
+      }
+      setDiceResults(results);
+      setRolling(false);
+    }, 1000);
   };
+
+  useEffect(() => {
+    let lastShakeTimestamp = 0;
+    const shakeThreshold = 25;
+
+    const handleDeviceMotion = (event) => {
+      const { accelerationIncludingGravity } = event;
+      const acceleration = Math.sqrt(
+        accelerationIncludingGravity.x ** 2 +
+        accelerationIncludingGravity.y ** 2 +
+        accelerationIncludingGravity.z ** 2
+      );
+
+      const now = Date.now();
+      if (acceleration > shakeThreshold && now - lastShakeTimestamp > 1000) {
+        rollDice();
+        lastShakeTimestamp = now;
+      }
+    };
+
+    window.addEventListener('devicemotion', handleDeviceMotion);
+
+    return () => {
+      window.removeEventListener('devicemotion', handleDeviceMotion);
+    };
+  }, [rollDice]);
 
   return (
     <div className="App">
@@ -52,4 +76,3 @@ function App() {
 }
 
 export default App;
-

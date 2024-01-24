@@ -24,7 +24,7 @@
 
 .dice-container > * {
   margin: 10px;
-  animation: roll 1s ease-out; /* Apply the animation */
+  animation: roll 1s ease-out, rollIn 1s forwards;; /* Apply the animation */
 }
 
 
@@ -58,6 +58,17 @@
 @keyframes fadeOut {
   from { opacity: 1; }
   to { opacity: 0; }
+}
+
+@keyframes rollIn {
+  0% {
+    transform: translate(-50%, -50%); /* Start from a random point */
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0); /* End at the final position */
+    opacity: 1;
+  }
 }
 
 body {

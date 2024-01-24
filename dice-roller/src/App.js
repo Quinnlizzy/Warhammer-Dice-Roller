@@ -10,20 +10,24 @@ function App() {
   const [diceResults, setDiceResults] = useState([]);
   const [rolling, setRolling] = useState(false);
   const [key, setKey] = useState(0);
+  const [targetRoll, setTargetRoll] = useState(3); // New state variable for the target roll
+
 
   const rollDice = () => {
     setRolling(true);
+    setDiceResults([]); // Clear the previous dice results
     setTimeout(() => {
       const results = [];
       for (let i = 0; i < numberOfDice; i++) {
         const result = Math.floor(Math.random() * 6) + 1;
-        results.push(result);
+        results.push({ value: result, meetsTarget: result >= targetRoll });
       }
       setDiceResults(results);
       setRolling(false);
       setKey(prevKey => prevKey + 1);
     }, 1000);
   };
+
 
   useEffect(() => {
     let lastShakeTimestamp = 0;
@@ -52,29 +56,37 @@ function App() {
   }, [rollDice]);
 
   return (
-    <div className="App">
-      <h1>Dice Roller App</h1>
-      <label>
-        Number of 6-sided dice:
-        <input
-          type="number"
-          value={numberOfDice}
-          onChange={(e) => setNumberOfDice(Math.max(1, parseInt(e.target.value, 10)))}
-        />
-      </label>
-      <button onClick={rollDice}>Roll Dice</button>
-      {diceResults.length > 0 && (
-        <div>
-          <h2>Results:</h2>
-          <div key={key} className={`dice-container ${rolling ? 'rolling' : ''}`}>
+      <div className="App">
+        <h1>Dice Roller App</h1>
+        <label>
+          Number of 6-sided dice:
+          <input
+            type="number"
+            value={numberOfDice}
+            onChange={(e) => setNumberOfDice(Math.max(1, parseInt(e.target.value, 10)))}
+          />
+        </label>
+        <label>
+  Target roll (1-6):
+  <input
+    type="number"
+    value={targetRoll}
+    onChange={(e) => setTargetRoll(Math.min(6, Math.max(1, parseInt(e.target.value, 10))))}
+  />
+</label>
+        <button onClick={rollDice}>Roll Dice</button>
+        {diceResults.length > 0 && (
+          <div>
+            <h2>Results:</h2>
+            <div key={key} className={`dice-container ${rolling ? 'rolling' : ''}`}>
             {diceResults.map((result, index) => (
-              <FontAwesomeIcon key={index} icon={diceIcons[result - 1]} size="3x" />
-            ))}
+  <FontAwesomeIcon key={index} icon={diceIcons[result.value - 1]} size="3x" className={result.meetsTarget ? 'meets-target' : 'does-not-meet-target'} />
+))}
+            </div>
           </div>
-        </div>
-      )}
-    </div>
-  );
+        )}
+      </div>
+    );
 }
 
 export default App;

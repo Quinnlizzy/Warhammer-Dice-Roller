@@ -6,7 +6,7 @@
 }
 
 /* src/App.css */
-@keyframes roll {
+@keyframes rolling {
   0% { transform: rotate(0deg); }
   25% { transform: rotate(180deg); }
   50% { transform: rotate(360deg); }
@@ -32,9 +32,33 @@
   animation: roll 1s ease-out; /* Apply the animation only when rolling */
 }
 
+.rolling {
+  animation: rolling 1s forwards;
+}
 
+.meets-target {
+  animation: rolling 1s forwards, borderAnimationGreen 1s forwards 1s; /* 1s delay added */
+}
 
+.does-not-meet-target {
+  animation: rolling 1s forwards, borderAnimationRed 1s forwards 1s, /* 1s delay added */
+              fadeOut 5s forwards 2s;
+}
 
+@keyframes borderAnimationGreen {
+  from { border: 1px solid transparent; }
+  to { border: 1px solid green; }
+}
+
+@keyframes borderAnimationRed {
+  from { border: 1px solid transparent; }
+  to { border: 1px solid red; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
 
 body {
   background-color: #1d2126;

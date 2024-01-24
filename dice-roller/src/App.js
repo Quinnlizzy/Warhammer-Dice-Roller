@@ -9,6 +9,7 @@ function App() {
   const [numberOfDice, setNumberOfDice] = useState(1);
   const [diceResults, setDiceResults] = useState([]);
   const [rolling, setRolling] = useState(false);
+  const [key, setKey] = useState(0);
 
   const rollDice = () => {
     setRolling(true);
@@ -20,6 +21,7 @@ function App() {
       }
       setDiceResults(results);
       setRolling(false);
+      setKey(prevKey => prevKey + 1);
     }, 1000);
   };
 
@@ -64,7 +66,7 @@ function App() {
       {diceResults.length > 0 && (
         <div>
           <h2>Results:</h2>
-          <div className={`dice-container ${rolling ? 'rolling' : ''}`}>
+          <div key={key} className={`dice-container ${rolling ? 'rolling' : ''}`}>
             {diceResults.map((result, index) => (
               <FontAwesomeIcon key={index} icon={diceIcons[result - 1]} size="3x" />
             ))}

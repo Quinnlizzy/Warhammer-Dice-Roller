@@ -19,7 +19,10 @@ function App() {
       const results = [];
       for (let i = 0; i < numberOfDice; i++) {
         const result = Math.floor(Math.random() * 6) + 1;
-        results.push({ value: result, meetsTarget: result >= targetRoll });
+        results.push({ 
+          value: result, 
+          meetsTarget: targetRoll ? result >= targetRoll : true 
+        });
       }
       setDiceResults(results);
       setRolling(false);

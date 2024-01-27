@@ -20,9 +20,13 @@ function App() {
       const results = [];
       for (let i = 0; i < numberOfDice; i++) {
         const result = Math.floor(Math.random() * 6) + 1;
-        results.push({ value: result, meetsTarget: result >= targetRoll });
+        results.push({ 
+          value: result, 
+          meetsTarget: targetRoll ? result >= targetRoll : true 
+        });
       }
       setDiceResults(results);
+      setNumberOfDice(results.filter(dice => dice.meetsTarget).length);
       setRolling(false);
       setKey(prevKey => prevKey + 1);
     }, 1000);
@@ -60,6 +64,15 @@ function App() {
         <h1>In the Grim, Dark Future...</h1>
         <h2>There is only WAR!</h2>
         <h3>May the Warp take pity on you...</h3>
+        <div>
+            <button onClick={() => {
+  setNumberOfDice(1);
+  setTargetRoll(1);
+  setDiceResults([]); // Remove all dice from the board
+}}>
+  Clear the Board
+</button>
+              </div>
         <label>
           Number of 6-sided dice:
           <input
@@ -76,7 +89,9 @@ function App() {
     onChange={(e) => setTargetRoll(Math.min(6, Math.max(1, parseInt(e.target.value, 10))))}
   />
 </label>
-        <button onClick={rollDice}>Roll Dice</button>
+<div>
+        <button onClick={rollDice}>Throw. And may the Warp take pity on you...</button>
+        </div>
         {diceResults.length > 0 && (
           <div>
             <h2>Results:</h2>

@@ -10,8 +10,7 @@ function App() {
   const [diceResults, setDiceResults] = useState([]);
   const [rolling, setRolling] = useState(false);
   const [key, setKey] = useState(0);
-  const [targetRoll, setTargetRoll] = useState(3); // New state variable for the target roll
-
+  const [targetRoll, setTargetRoll] = useState(null); // 'No Target' option
 
   const rollDice = () => {
     setRolling(true);

@@ -57,7 +57,9 @@ function App() {
 
   return (
       <div className="App">
-        <h1>Dice Roller App</h1>
+        <h1>In the Grim, Dark Future...</h1>
+        <h2>There is only WAR!</h2>
+        <h3>May the Warp take pity on you...</h3>
         <label>
           Number of 6-sided dice:
           <input

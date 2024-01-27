@@ -10,7 +10,8 @@ function App() {
   const [diceResults, setDiceResults] = useState([]);
   const [rolling, setRolling] = useState(false);
   const [key, setKey] = useState(0);
-  const [targetRoll, setTargetRoll] = useState(null); // 'No Target' option
+  const [targetRoll, setTargetRoll] = useState(3); // New state variable for the target roll
+
 
   const rollDice = () => {
     setRolling(true);
@@ -19,10 +20,7 @@ function App() {
       const results = [];
       for (let i = 0; i < numberOfDice; i++) {
         const result = Math.floor(Math.random() * 6) + 1;
-        results.push({ 
-          value: result, 
-          meetsTarget: targetRoll ? result >= targetRoll : true 
-        });
+        results.push({ value: result, meetsTarget: result >= targetRoll });
       }
       setDiceResults(results);
       setRolling(false);
@@ -69,18 +67,11 @@ function App() {
           />
         </label>
         <label>
-  Target roll (1-6, or 'No Target'):
+  Target roll (1-6):
   <input
-    type="text"
-    value={targetRoll === null ? 'No Target' : targetRoll}
-    onChange={(e) => {
-      const value = e.target.value;
-      if (value === 'No Target') {
-        setTargetRoll(null);
-      } else {
-        setTargetRoll(Math.min(6, Math.max(1, parseInt(value, 10))));
-      }
-    }}
+    type="number"
+    value={targetRoll}
+    onChange={(e) => setTargetRoll(Math.min(6, Math.max(1, parseInt(e.target.value, 10))))}
   />
 </label>
         <button onClick={rollDice}>Roll Dice</button>

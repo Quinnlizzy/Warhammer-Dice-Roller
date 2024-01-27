@@ -15,11 +15,9 @@
 }
 
 .App {
-  background: url('path-to-your-image.png') no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  height: 100vh;
+  background: radial-gradient(circle at center, transparent, black 80%);
+  box-shadow: inset 0 0 100px black;
 }
 
 .dice-container {

@@ -69,11 +69,18 @@ function App() {
           />
         </label>
         <label>
-  Target roll (1-6):
+  Target roll (1-6, or 'No Target'):
   <input
-    type="number"
-    value={targetRoll}
-    onChange={(e) => setTargetRoll(Math.min(6, Math.max(1, parseInt(e.target.value, 10))))}
+    type="text"
+    value={targetRoll === null ? 'No Target' : targetRoll}
+    onChange={(e) => {
+      const value = e.target.value;
+      if (value === 'No Target') {
+        setTargetRoll(null);
+      } else {
+        setTargetRoll(Math.min(6, Math.max(1, parseInt(value, 10))));
+      }
+    }}
   />
 </label>
         <button onClick={rollDice}>Roll Dice</button>

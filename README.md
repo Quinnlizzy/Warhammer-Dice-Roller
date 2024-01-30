@@ -9,7 +9,7 @@ i like that - i'm goin to do that
 -
 could even do an army theme
 -
-now im having a panic attack thinking abou tall the damn space maine chapter colour schemes
+now im having a panic attack thinking about all the damn space marine chapter colour schemes
 -
-i should probabaly jsut start out the font first
+i should probabaly just start out the font first
 -

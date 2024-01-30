@@ -16,3 +16,5 @@ i should probabaly just start out the font first
 i'm not sure how worth it that would be but it would be pretty cool to have
 -
 ok, going to have to do that now aren't i
+-
+for sigmar etc etc...

@@ -8,3 +8,6 @@ OR - instead of an app with a (grim)dark theme (LOLZ) i could make a 40k/AOS/Old
 i like that - i'm goin to do that
 -
 could even do an army theme
+-
+now im having a panic attack thinking abou tall the damn space maine chapter colour schemes
+-
